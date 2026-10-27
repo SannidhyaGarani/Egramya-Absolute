@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Mail, Phone, MapPin, Send, CheckCircle2, ShieldCheck, Building2, User, FileText } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
 
 const ContactPage = () => {
-  const brandColor = "#eb008d";
+  const { t } = useLanguage();
+  const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    org: '',
+    email: '',
+    phone: '',
+    interest: 'Partner With Us (CSR & Govt)',
+    message: '',
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   const offices = [
     {
       city: "Bhopal",
       country: "India Office",
-      type: "Registered Office",
+      type: "Registered Secretariat",
       address: "162 Modi Heights, 4th floor, Zone II, MP Nagar, Bhopal, Madhya Pradesh",
-      email: "info@absolutegramya.com",
-      phones: ["+91 7880095369", "7880094664", "7880094658"]
+      email: "contact@absolutegramya.com",
+      phones: ["+91 7880095369", "+91 7880094664"]
     },
     {
-      city: "Dubai",
-      country: "Global Office",
-      type: "International Hub",
+      city: "Global Hub",
+      country: "International Advisory",
+      type: "Institutional Hub",
       address: "2101, DAMAC Business Tower, Business Bay, Dubai (U.A.E)",
       email: "global@absolutegramya.com",
       phones: ["Available on Request"]
@@ -24,125 +40,186 @@ const ContactPage = () => {
   ];
 
   return (
-    <main className="bg-white pt-20">
-      {/* 1. HERO: The Invitation */}
-      <section className="py-24 md:py-32 border-b border-stone-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="max-w-4xl">
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-[10px] font-bold tracking-[0.6em] uppercase text-stone-400 mb-8 block"
-            >
-              Get in Touch
-            </motion.span>
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-5xl md:text-8xl font-light text-stone-900 leading-[0.95] tracking-tighter mb-12"
-            >
-              Let’s build a <br />
-              <span className="font-serif italic text-stone-500">better future</span> <br />
-              together.
-            </motion.h1>
-            <p className="text-xl text-stone-500 font-light max-w-2xl leading-relaxed">
-              Contact us today to learn more about how we can help your community achieve its full potential.
-            </p>
-          </div>
+    <main className="bg-stone-50 text-stone-900 pt-16">
+      {/* Hero Section */}
+      <section className="bg-stone-900 text-white py-20 px-4 sm:px-6 lg:px-8 border-b border-stone-800 text-center">
+        <div className="max-w-7xl mx-auto space-y-4">
+          <span className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-widest border border-amber-500/30">
+            <ShieldCheck className="w-4 h-4" />
+            <span>ACTION-ORIENTED ENGAGEMENT</span>
+          </span>
+          <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+            {t('contactSection.title')}
+          </h1>
+          <p className="text-stone-300 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed text-justify-custom">
+            {t('contactSection.subtitle')}
+          </p>
         </div>
       </section>
 
-      {/* 2. CONTACT SECTION: Split Layout */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+      {/* Main Content Form & Office Info */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
-            {/* Form Side */}
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-12"
-            >
-              <h3 className="text-2xl font-light text-stone-900 mb-8">Send a Message</h3>
-              <form className="space-y-8">
-                <div className="relative group">
-                  <input type="text" placeholder="Full Name" className="w-full py-4 bg-transparent border-b border-stone-200 focus:border-[#eb008d] outline-none transition-all font-light" />
-                  <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#eb008d] group-focus-within:w-full transition-all duration-500" />
-                </div>
-                <div className="relative group">
-                  <input type="email" placeholder="Email Address" className="w-full py-4 bg-transparent border-b border-stone-200 focus:border-[#eb008d] outline-none transition-all font-light" />
-                  <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#eb008d] group-focus-within:w-full transition-all duration-500" />
-                </div>
-                <div className="relative group">
-                  <textarea rows="4" placeholder="How can we help your community?" className="w-full py-4 bg-transparent border-b border-stone-200 focus:border-[#eb008d] outline-none transition-all font-light resize-none" />
-                  <div className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#eb008d] group-focus-within:w-full transition-all duration-500" />
-                </div>
-                <button className="group relative flex items-center gap-6 pt-4">
-                   <span className="text-xs font-bold uppercase tracking-[0.3em]">Send Inquiry</span>
-                   <div className="w-12 h-12 rounded-full border border-stone-200 flex items-center justify-center group-hover:bg-stone-900 group-hover:border-stone-900 transition-all duration-500">
-                      <svg className="w-4 h-4 text-stone-900 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                   </div>
-                </button>
-              </form>
-            </motion.div>
+            {/* Form Column */}
+            <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-stone-200 shadow-xl space-y-6">
+              <div>
+                <h3 className="text-2xl font-extrabold text-stone-900">
+                  Institutional Inquiry & Proposal Request
+                </h3>
+                <p className="text-xs text-stone-500 mt-1">
+                  Fill out the details below to request project proposals or initiate partnership discussions.
+                </p>
+              </div>
 
-            {/* Offices Side */}
-            <div className="space-y-20">
-              {offices.map((office, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.2 }}
-                  className="relative pl-12"
-                >
-                  <div className="absolute left-0 top-0 w-[1px] h-full bg-stone-100">
-                    <div className="absolute top-0 left-0 w-full h-12" style={{ backgroundColor: i === 0 ? brandColor : '#stone-900' }} />
+              {submitted ? (
+                <div className="py-12 text-center space-y-4">
+                  <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-10 h-10" />
                   </div>
-                  
-                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400 block mb-2">{office.country}</span>
-                  <h4 className="text-3xl font-light text-stone-900 mb-6 font-serif italic">{office.city}</h4>
-                  
-                  <div className="space-y-6 text-sm text-stone-500 font-light leading-relaxed">
-                    <p className="max-w-xs">{office.address}</p>
-                    <div className="space-y-1">
-                      <p className="text-stone-900 font-medium">{office.email}</p>
-                      {office.phones.map((p, idx) => (
-                        <p key={idx}>{p}</p>
-                      ))}
+                  <h4 className="text-2xl font-bold text-stone-900">Request Submitted Successfully!</h4>
+                  <p className="text-stone-600 max-w-md mx-auto text-sm">
+                    Thank you. Our institutional partnerships desk will review your details and connect within 24 hours.
+                  </p>
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="mt-4 px-6 py-2.5 bg-stone-900 text-white rounded-xl text-xs font-bold uppercase tracking-widest"
+                  >
+                    Submit Another Request
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 uppercase mb-1">
+                        {t('contactSection.form.name')}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Full Name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-amber-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 uppercase mb-1">
+                        {t('contactSection.form.org')}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Organization / Institution"
+                        value={formData.org}
+                        onChange={(e) => setFormData({ ...formData, org: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-amber-600"
+                      />
                     </div>
                   </div>
-                </motion.div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 uppercase mb-1">
+                        {t('contactSection.form.email')}
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="Email Address"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-amber-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-stone-700 uppercase mb-1">
+                        {t('contactSection.form.phone')}
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Contact Number"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-amber-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 uppercase mb-1">
+                      {t('contactSection.form.interest')}
+                    </label>
+                    <select
+                      value={formData.interest}
+                      onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-amber-600 bg-stone-50"
+                    >
+                      <option value="Partner With Us (CSR & Govt)">Partner With Us (CSR, Govt & Universities)</option>
+                      <option value="Start a Rural Enterprise Programme">Start a Rural Enterprise Programme</option>
+                      <option value="Become a Gramya Partner">Become a Gramya Partner</option>
+                      <option value="Join as a Rural Entrepreneur">Join as a Rural Entrepreneur</option>
+                      <option value="Explore e-Gramya Products">Explore e-Gramya Products & Institutional Supply</option>
+                      <option value="Request a Project Proposal">Request a Custom Project Proposal</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-stone-700 uppercase mb-1">
+                      {t('contactSection.form.message')}
+                    </label>
+                    <textarea
+                      rows={4}
+                      placeholder="Specify project objectives, targeted geographical districts, or partnership scope..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-amber-600 resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs uppercase tracking-widest shadow-lg shadow-amber-600/30 flex items-center justify-center space-x-2 transition-all"
+                  >
+                    <span>{t('contactSection.form.submit')}</span>
+                    <Send className="w-4 h-4" />
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Offices & Contact Details Column */}
+            <div className="lg:col-span-5 space-y-6">
+              {offices.map((off, idx) => (
+                <div key={idx} className="bg-white p-8 rounded-3xl border border-stone-200 shadow-md space-y-4">
+                  <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-600 block">
+                    {off.type}
+                  </span>
+                  <h4 className="text-2xl font-bold text-stone-900">{off.city}</h4>
+                  <div className="space-y-3 text-xs text-stone-600 leading-relaxed">
+                    <div className="flex items-start space-x-2">
+                      <MapPin className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                      <span>{off.address}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Mail className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                      <span>{off.email}</span>
+                    </div>
+                    {off.phones.map((ph, pIdx) => (
+                      <div key={pIdx} className="flex items-center space-x-2">
+                        <Phone className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                        <span>{ph}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
+
           </div>
-        </div>
-      </section>
-
-      {/* 3. CLOSING: High-Impact Statement */}
-      <section className="py-32 bg-stone-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-           {/* Abstract world connection map background placeholder */}
-           <div className="w-full h-full border-[0.5px] border-white/10 rounded-full scale-150 -translate-y-1/2" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-5xl font-light leading-tight mb-12">
-              Together, we can create a <br /> 
-              <span className="font-serif italic text-stone-500">brighter future</span> for <br />
-              rural communities.
-            </h2 >
-            <span className="text-xs font-bold uppercase tracking-[0.6em] text-[#eb008d]">Join us today</span>
-          </motion.div>
         </div>
       </section>
     </main>

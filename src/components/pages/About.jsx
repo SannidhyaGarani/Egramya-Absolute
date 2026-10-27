@@ -1,155 +1,144 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { ShieldCheck, ArrowRight, Building2, Users, Target, Compass, Award } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import ProposalModal from '../ProposalModal';
 
 const AboutPage = () => {
-  const brandColor = "#eb008d";
+  const { t } = useLanguage();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalCta, setModalCta] = useState('Partner With Us (CSR & Govt)');
+
+  const openModal = (cta) => {
+    setModalCta(cta || 'Partner With Us (CSR & Govt)');
+    setModalOpen(true);
+  };
 
   const standsFor = [
-    { title: "Agro-Economy", desc: "Empowering Agro-economy and Agri-preneurship in the state." },
-    { title: "Employment", desc: "Establishing growing rural enterprises and scaling existing sustainable models." },
-    { title: "BDS Growth", desc: "Developing the capacity of local Business Development Services (BDS) Providers." },
-    { title: "Market Networks", desc: "Developing a sustainable marketing network for rural enterprises." },
-    { title: "Stakeholder Forums", desc: "Addressing rural enterprise issues at district and national levels." },
-    { title: "Knowledge Capacity", desc: "Managing businesses effectively, sustainably, and productively." }
+    { title: "Enterprise Creation", desc: "Building sustainable, market-linked rural micro-enterprises and producer collectives." },
+    { title: "Women Livelihoods", desc: "Empowering SHGs, Lakhpati Didi tracks, and women-led rural business models." },
+    { title: "Agro & Dairy Innovation", desc: "Scaling Village Dairy Counsellor Development Centres and clean milk value processing." },
+    { title: "Employability & Skills", desc: "Delivering short-term vocational training, digital literacy, and placement support." },
+    { title: "E-Commerce Marketplaces", desc: "Linking rural producers directly with national retail and institutional procurement." },
+    { title: "Institutional Advisory", desc: "Research, baseline studies, project management, and strategic CSR consulting." }
   ];
 
   return (
-    <main className="bg-white pt-20">
-      {/* 1. HERO SECTION: The Declaration */}
-      <section className="relative py-24 md:py-40 border-b border-stone-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <main className="bg-stone-50 text-stone-900 pt-16">
+      {/* 1. HERO SECTION */}
+      <section className="relative py-20 md:py-32 bg-stone-900 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-900/20 via-stone-900 to-stone-950" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="max-w-4xl"
+            className="max-w-4xl space-y-6"
           >
-            <span className="text-[10px] font-bold tracking-[0.6em] uppercase text-stone-400 mb-8 block">
-              About Absolute Gramya
+            <span className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-widest border border-amber-500/30">
+              <ShieldCheck className="w-4 h-4" />
+              <span>THE GRAMYA STORY</span>
             </span>
-            <h1 className="text-5xl md:text-8xl font-light text-stone-900 leading-[0.95] tracking-tighter mb-12">
-              Empowering communities. <br />
-              <span className="font-serif italic text-stone-500">Creating legacy.</span>
+
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
+              Building Rural Lives. <br />
+              <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-emerald-400 bg-clip-text text-transparent">
+                Creating Rural Enterprises.
+              </span>
             </h1>
-            <p className="text-xl md:text-2xl text-stone-600 font-light leading-relaxed">
-              Gramya is a Private Limited Company formed to express a mission of empowering communities and creating opportunities for the <span className="text-stone-900 font-normal">underprivileged rural development.</span>
+
+            <p className="text-stone-300 text-base sm:text-xl font-normal leading-relaxed text-justify-custom pt-2">
+              Absolute Gramya Private Limited is a rural-development and enterprise-building organisation working to create sustainable livelihoods by connecting people, skills, technology, markets and institutions.
             </p>
+
+            <div className="pt-4 flex flex-wrap gap-4">
+              <button
+                onClick={() => openModal('Partner With Us (CSR & Govt)')}
+                className="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-xl text-xs uppercase tracking-widest shadow-xl shadow-amber-600/30 flex items-center space-x-2 transition-all"
+              >
+                <span>Partner With Us</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => openModal('Request a Project Proposal')}
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs uppercase tracking-widest border border-white/20 transition-all"
+              >
+                Request Proposal
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. CORE PHILOSOPHY: The Values Grid */}
-      <section className="py-24 bg-stone-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            {['Transparency', 'Accountability', 'Sustainability'].map((value, i) => (
-              <motion.div
-                key={value}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="relative pl-8"
-              >
-                <div className="absolute left-0 top-0 w-[1px] h-full bg-stone-200">
-                  <div className="w-full h-8 bg-[#eb008d] absolute top-0" />
-                </div>
-                <h3 className="text-xl font-bold tracking-tight text-stone-900 mb-4">{value}</h3>
-                <p className="text-sm text-stone-500 leading-relaxed font-light">
-                  We value {value.toLowerCase()} in all our operations, working closely with community members to tailor solutions that meet unique challenges effectively.
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3. TRANSFORMATION: The "From-To" Visual */}
-      <section className="py-32 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col lg:flex-row gap-24 items-center">
-            <div className="w-full lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-light text-stone-900 mb-12">
-                Witnessing the <br /> <span className="font-serif italic text-stone-500">Transformation</span>
+      {/* 2. INSTITUTIONAL MISSION & PROPOSITION */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-6">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-amber-600">
+                STRATEGIC REPOSITIONING
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 leading-tight">
+                From Conventional NGO to <span className="text-amber-600 font-serif-custom italic">Impact Platform</span>
               </h2>
-              <div className="space-y-12">
-                {[
-                  { from: "Subsistence Agriculture", to: "Thriving Agribusinesses" },
-                  { from: "Illiteracy", to: "Quality Education" },
-                  { from: "Limited Healthcare", to: "Improved Medical Services" }
-                ].map((item, i) => (
-                  <div key={i} className="group cursor-default">
-                    <div className="flex items-center gap-6 text-stone-400 group-hover:text-stone-900 transition-colors">
-                      <span className="text-xs uppercase tracking-widest">{item.from}</span>
-                      <div className="h-[1px] flex-grow bg-stone-100 group-hover:bg-[#eb008d] transition-all duration-500" />
-                      <span className="text-lg font-serif italic">{item.to}</span>
-                    </div>
-                  </div>
-                ))}
+              <p className="text-stone-600 text-sm sm:text-base leading-relaxed text-justify-custom">
+                Gramya represents a new paradigm in rural economic development. Moving beyond one-off aid or basic skill workshops, we deploy an end-to-end ecosystem: identifying local potential, building industry skills, incubating enterprises, branding produce, and integrating into national digital commerce.
+              </p>
+
+              <div className="space-y-4 pt-2">
+                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+                  <h4 className="text-xs font-extrabold uppercase text-amber-900 tracking-wider">Core Positioning Statement</h4>
+                  <p className="text-sm font-bold text-amber-900 mt-1">
+                    "Connecting Rural People, Skills, Technology, Enterprise and Markets for Sustainable Livelihoods."
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="w-full lg:w-1/2 relative">
-              <div className="aspect-square bg-stone-100 rounded-2xl overflow-hidden shadow-2xl">
-                <img src="Image/e2.png"
-                  alt="Impact" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
+
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border border-stone-200">
+                <img
+                  src="/Image/e3.png"
+                  alt="Gramya Impact"
+                  className="w-full h-[420px] object-cover"
+                />
               </div>
-              <div className="absolute -bottom-10 -left-10 bg-[#eb008d] p-12 text-white hidden md:block">
-                <p className="text-4xl font-light tracking-tighter">Meaningful <br /> Impact.</p>
+              <div className="absolute -bottom-6 -left-6 bg-stone-900 text-white p-6 rounded-2xl border border-stone-800 shadow-xl hidden sm:block">
+                <span className="text-2xl font-extrabold text-amber-400 block">50,000+</span>
+                <span className="text-xs uppercase tracking-wider text-stone-300">Rural Lives Impacted</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. STRATEGIC GOALS: Gramya Stands For */}
-      <section className="py-32 bg-stone-950 text-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="mb-24">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.6em] text-[#eb008d] mb-6">Foundational Pillars</h4>
-            <h2 className="text-5xl font-light tracking-tighter">Gramya Stands For</h2>
+      {/* 3. FOUNDATIONAL PILLARS */}
+      <section className="py-20 bg-stone-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-amber-400">FOUNDATIONAL PILLARS</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold mt-2">What Gramya Stands For</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-            {standsFor.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="group"
-              >
-                <span className="text-4xl font-serif italic text-white/10 group-hover:text-[#eb008d]/40 transition-colors duration-500">
-                  0{i + 1}
-                </span>
-                <h3 className="text-lg font-bold tracking-tight mb-4 mt-2">{item.title}</h3>
-                <p className="text-stone-500 text-sm font-light leading-relaxed group-hover:text-stone-300 transition-colors">
-                  {item.desc}
-                </p>
-              </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {standsFor.map((item, idx) => (
+              <div key={idx} className="glass-panel-dark p-6 rounded-2xl border border-stone-800 space-y-3">
+                <span className="text-xs font-extrabold text-amber-400">PILLAR 0{idx + 1}</span>
+                <h3 className="text-lg font-bold text-white">{item.title}</h3>
+                <p className="text-xs text-stone-300 leading-relaxed text-justify-custom">{item.desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 5. ARTISAN HIGHLIGHT: The Nurturing Program */}
-      <section className="py-32 bg-white">
-        <div className="max-w-5xl mx-auto px-6 lg:px-12 border border-stone-100 p-12 md:p-24 relative overflow-hidden">
-          {/* Background Decorative Graphic */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 border border-stone-50 rounded-full" />
-
-          <div className="relative z-10 text-center">
-            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#eb008d] mb-8">Cultural Preservation</h4>
-            <h2 className="text-3xl md:text-5xl font-light text-stone-900 leading-tight mb-8">
-              Our Rural Artisan <br /> <span className="font-serif italic text-stone-500">Talent Nurturing Program</span>
-            </h2>
-            <p className="text-stone-500 font-light leading-relaxed max-w-2xl mx-auto text-lg mb-12">
-              We are dedicated to preserving traditional art forms while creating economic opportunities for rural artisans, ensuring that heritage lives alongside progress.
-            </p>
-            <button className="group flex items-center gap-4 mx-auto text-xs font-bold uppercase tracking-[0.3em] text-stone-900">
-              Explore the Program
-              <div className="w-10 h-[1px] bg-stone-200 group-hover:w-16 group-hover:bg-[#eb008d] transition-all duration-300" />
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* Proposal Modal */}
+      <ProposalModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialCtaType={modalCta}
+      />
     </main>
   );
 };
