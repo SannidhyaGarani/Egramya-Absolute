@@ -12,34 +12,7 @@ const Footer = ({ onOpenModal }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Domain Migration Banner in Footer (Requirement 8) */}
-        <div className="mb-16 p-6 rounded-2xl bg-gradient-to-r from-amber-950/80 via-stone-900 to-emerald-950/80 border border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-3 text-center sm:text-left">
-            <div className="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center flex-shrink-0">
-              <Globe className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 block">
-                {t('domainBanner.tag')}
-              </span>
-              <p className="text-xs sm:text-sm text-stone-200">
-                {t('domainBanner.text')}{' '}
-                <strong className="text-white underline decoration-amber-500 font-mono">
-                  {t('domainBanner.domain')}
-                </strong>
-              </p>
-            </div>
-          </div>
-
-          <a
-            href="https://www.absolutegramya.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center space-x-1.5 transition-colors shadow-lg flex-shrink-0"
-          >
-            <span>Visit Portal</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </div>
+       
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-stone-800">
           
@@ -152,9 +125,7 @@ const Footer = ({ onOpenModal }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-4">
           <p>{t('footer.copyright')}</p>
-          <p className="text-[11px] text-stone-400">
-            Domain Recommendation: <span className="text-stone-300">www.absolutegramya.com</span>
-          </p>
+          
         </div>
       </div>
     </footer>

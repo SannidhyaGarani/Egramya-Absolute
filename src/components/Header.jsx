@@ -42,18 +42,7 @@ const Header = () => {
       {/* Top Institutional Announcement & Domain Migration Banner (Requirement 8) */}
       <div className="bg-stone-900 text-stone-300 text-xs py-2 px-4 border-b border-stone-800">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
-          <div className="flex items-center space-x-2">
-            <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold uppercase text-[10px] tracking-wider">
-              {t('domainBanner.tag')}
-            </span>
-            <span className="text-[11px] sm:text-xs">
-              {t('domainBanner.text')}{' '}
-              <strong className="text-white underline decoration-amber-500">
-                {t('domainBanner.domain')}
-              </strong>
-            </span>
-          </div>
-
+          
           <div className="flex items-center space-x-4">
             {/* Language Switcher (Requirement 7) */}
             <button
